@@ -1,4 +1,4 @@
-import {CounterStateType} from '../redux/counter-reducer';
+import {AppStateType} from '../redux/store';
 
 export const loadState = () => {
     try {
@@ -12,9 +12,8 @@ export const loadState = () => {
     }
 };
 
-export const saveState = (state: CounterStateType) => {
+export const saveState = (state: AppStateType) => {
     try {
-        console.log('saveState')
         const serializedState = JSON.stringify(state);
         localStorage.setItem('state', serializedState);
     } catch {

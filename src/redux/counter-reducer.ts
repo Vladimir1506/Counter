@@ -1,13 +1,5 @@
-import {saveState} from '../utils/localStorage';
-
-export type CounterStateType = {
-    min: number
-    max: number
-    count: number
-    isSettingsEnabled: boolean
-    isIncorrectValue: boolean
-}
-const initialState: CounterStateType = {
+type InitialStateType = typeof initialState
+const initialState = {
     min: 0,
     max: 5,
     count: 0,
@@ -21,7 +13,7 @@ const TOGGLE_SETTINGS_ENABLED = 'TOGGLE-SETTINGS-ENABLED'
 const INC_COUNT = 'INC-COUNT'
 
 const isIncorrect = (min: number, max: number) => (min < 0 || max < 0 || max <= min)
-export const counterReducer = (state = initialState, action: ActionType) => {
+export const counterReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case SET_MIN:
             const min = action.payload.min
@@ -42,9 +34,7 @@ export const counterReducer = (state = initialState, action: ActionType) => {
             return {...state, count: action.payload.count}
         case TOGGLE_SETTINGS_ENABLED:
             const isSettingsEnabled = action.payload.isSettingsEnabled
-            const newState = {...state, isSettingsEnabled, count: isSettingsEnabled ? state.count : state.min}
-            !isSettingsEnabled && saveState(newState)
-            return newState
+            return {...state, isSettingsEnabled, count: isSettingsEnabled ? state.count : state.min}
         case INC_COUNT:
             return {...state, count: ++state.count}
         default:

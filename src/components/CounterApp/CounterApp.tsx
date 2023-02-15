@@ -1,7 +1,7 @@
 import React from 'react';
 import CounterBlock from './CounterBlock';
 import './CounterApp.css'
-import CounterSettings from './CounterSettings';
+import CounterSettings from './CounteinerSettings/CounterSettings';
 
 const CounterApp = () => {
     return (

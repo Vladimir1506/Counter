@@ -3,8 +3,8 @@ import Counter from './Counter';
 import Button from './Button';
 import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
-import {CounterStateType, incCount, setCount} from '../../redux/counter-reducer';
-import {store} from '../../redux/store';
+import {incCount, setCount} from '../../redux/counter-reducer';
+import {AppStateType, store} from '../../redux/store';
 
 const MainWrapper = styled.div`
   border: 4px solid cadetblue;
@@ -24,11 +24,11 @@ const ButtonWrapper = styled.div`
   height: 20%;
 `
 const CounterBlock = (() => {
-    
-    const incorrectValue = useSelector<CounterStateType, boolean>(state => state.isIncorrectValue)
-    const count = useSelector<CounterStateType, number>(state => state.count)
-    const {min, max} = store.getState()
-    const isSettingsEnabled = useSelector<CounterStateType, boolean>(state => state.isSettingsEnabled)
+
+    const incorrectValue = useSelector<AppStateType, boolean>(state => state.counter.isIncorrectValue)
+    const count = useSelector<AppStateType, number>(state => state.counter.count)
+    const {min, max} = store.getState().counter
+    const isSettingsEnabled = useSelector<AppStateType, boolean>(state => state.counter.isSettingsEnabled)
     const dispatch = useDispatch()
     const incrementCount = useCallback(() => dispatch(incCount()), [dispatch])
     const resetCount = useCallback(() => dispatch(setCount(min)), [dispatch, min])
